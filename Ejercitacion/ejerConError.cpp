@@ -38,8 +38,6 @@ int main(){
 
 	}while( ctne > 0);
 
-	
-
     return 0;
 
 }
