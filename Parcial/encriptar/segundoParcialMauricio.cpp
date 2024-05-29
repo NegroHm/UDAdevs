@@ -19,4 +19,4 @@ void desplazarEnUno(string encriptada){
         encriptada[i] = en
     }
     
-}
+}   
