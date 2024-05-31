@@ -23,7 +23,6 @@ Algoritmo calculadora
 	
 FinAlgoritmo
 
-
 //Suma
 Funcion Suma=suma(numeroA, numeroB)
 	Definir sumar Como Entero
