@@ -23,8 +23,13 @@ int main()
         cout << "3 _ Cuando la posicion de la palabra es par, el paso es -1." << endl;
         cout << "4 _ Con ambas tecnicas." << endl;
         cout << "5 _ Salir del programa" << endl;
-
         cin >> userOption;
+
+        //! Validar el ingleso de la matriz
+        //! Validar que la matriz no este vacia
+        //! Validar que la matriz no tenga numeros
+        //! Validar el ingreso de las 
+
 
         switch (userOption)
         {
