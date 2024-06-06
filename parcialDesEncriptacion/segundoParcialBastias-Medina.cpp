@@ -20,7 +20,7 @@ int main()
         cout << "Ingrese una de las siguientes opciones para desencriptar su palabra: " << endl; 
         cout << "1 _ Cargar Matriz 4x20 (4 palabras de 20 caracteres maximo)" << endl;
         cout << "2 _ Paso -1" << endl;
-        cout << "3 _ Cuando la posicion de la palabra es par, el paso es -1." << endl;
+        cout << "3 _ Cuando la posicion de la letra es par, el paso es -1." << endl;
         cout << "4 _ Con ambas tecnicas." << endl;
         cout << "5 _ Salir del programa" << endl;
         cin >> userOption;
@@ -28,7 +28,8 @@ int main()
         //! Validar el ingleso de la matriz
         //! Validar que la matriz no este vacia
         //! Validar que la matriz no tenga numeros
-        //! Validar el ingreso de las 
+        //! Validar el ingreso de las mayusculas y minuculas
+        //! Negar el ingreso de los numeros
 
 
         switch (userOption)
@@ -65,9 +66,40 @@ int main()
 }
 
 void llenarMatriz(char matrix[4][20]) { // Función para llenar la matriz con el mensaje encriptado
+    //! Validar que no este vacio
+    bool palabraValida = false;
+
     for (int i = 0; i < 4; ++i) {
-        cout << "Ingrese una palabra: ";
-        cin >> matrix[i];
+       
+        do 
+        {    
+             palabraValida = true;
+            cout << "Ingrese la palabra "<<i+1<<": ";
+            cin >> matrix[i];
+
+            for ( int j = 0; j < strlen(matrix[i]); j++)
+            {
+                
+                    cout<< "caracter: " << matrix[i][j]<<" "<<int(matrix[i][j])<< endl;
+                    if (matrix[i][j]<97 || matrix[i][j]>122){
+                        cout << "caracter  malo"<<endl;
+                        palabraValida=false;
+                    }
+                
+            }
+        }while (palabraValida==false);
+
+
+
+        //int length = sizeof(matrix[i])/sizeof(char);
+        //cout << length;
+        // if (i == )
+        // {
+        //     cout << "El array " << i << " esta vacio" << endl;  
+        // } else {
+        //     cout << "El array " << i << " tiene elementos" << endl;
+        // }
+    
     }
 
     // Mostrar las palabras ingresadas
