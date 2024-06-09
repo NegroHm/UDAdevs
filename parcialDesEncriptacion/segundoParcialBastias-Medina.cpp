@@ -1,13 +1,17 @@
+//! librerias
 #include <iostream> // Biblioteca estándar para operaciones de entrada/salida
 #include <cstring>  // Biblioteca estándar para manejo de cadenas de caracteres
 
 using namespace std;
 
-// Declaración de funciones
+//! Declaración de funciones
 void showMenu(int *opcion, bool matrizCargada); // Muestra el menú
 void llenarMatriz(char matrix[4][20]); // Función para llenar la matriz con palabras ingresadas por el usuario
 void deslazarUno(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en una matriz según el código ASCII
 void desplazarPar(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en posiciones pares de una matriz
+
+
+//! MAIN
 
 int main()
 {
@@ -65,6 +69,11 @@ int main()
     return 0;
 }
 
+
+//! Subprogramas
+
+//* Mostrar el menu
+
 void showMenu(int *opcion, bool matrizCargada)
 {
     do
@@ -87,9 +96,19 @@ void showMenu(int *opcion, bool matrizCargada)
             cout << "Primero debes cargar la matriz (opción 1)." << endl; // Si no esta cargada muestra este mensaje
             *opcion = 0; // Si no esta cargada vuelve el loop a 0
         }
-
     } while (*opcion < 1 || *opcion > 5);
 }
+
+
+//* Minuculas
+void convertirMinusculas(char palabra[]) {
+    for (int i = 0; palabra[i] != '\0'; ++i) {
+        //tolower es una funcion de <cctype> para pasar los caracteres ingresados a minusculas
+        palabra[i] = tolower(palabra[i]);
+    }
+}
+
+//* Llenar matriz
 
 void llenarMatriz(char matrix[4][20])
 {
@@ -103,6 +122,8 @@ void llenarMatriz(char matrix[4][20])
             palabraValida = true;
             cout << "Ingrese la palabra " << i + 1 << ": ";
             cin >> matrix[i];
+
+            convertirMinusculas(matrix[i]);
 
             for (int j = 0; j < strlen(matrix[i]); j++) // Con esto averiguo si hay algun numero u otro caracter
             {
@@ -123,6 +144,8 @@ void llenarMatriz(char matrix[4][20])
         cout << matrix[i] << endl;
     }
 }
+
+//* Desplazamiento en uno
 
 void deslazarUno(char matrix[4][20], char matriz[4][20])
 {
@@ -146,6 +169,8 @@ void deslazarUno(char matrix[4][20], char matriz[4][20])
         cout << matriz[i] << endl;
     }
 }
+
+//* Desplazamiento par
 
 void desplazarPar(char matrix[4][20], char matriz[4][20])
 {
