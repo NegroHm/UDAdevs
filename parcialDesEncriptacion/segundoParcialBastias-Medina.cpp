@@ -1,16 +1,17 @@
 //! librerias
-#include <iostream> // Biblioteca estándar para operaciones de entrada/salida
-#include <cstring>  // Biblioteca estándar para manejo de cadenas de caracteres
+#include <iostream> // Biblioteca estándar 
+#include <cstring>  // Biblioteca usada para el manejo de strings
+#include <limits> // Biblioteca usada para la validacion de ingreso en el menu
 
 using namespace std;
 
 //! Declaración de funciones
 void showMenu(int *opcion, bool matrizCargada); // Muestra el menú
 void llenarMatriz(char matrix[4][20]); // Función para llenar la matriz con palabras ingresadas por el usuario
-void deslazarUno(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en una matriz según el código ASCII
-void desplazarPar(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en posiciones pares de una matriz
-void convertirMinusculas(char palabra[]);// Pasa todas las plabras ingresadas a minuscula
-void ingresarOpcion(int &opcion);
+void desplazarUno(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en una matriz según el código ASCII (paso -1)
+void desplazarPar(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en posiciones pares de una matriz (paso -1)
+void convertirMinusculas(char palabra[]);// Pasa todas las plabras ingresadas a minuscula, por si ingresa alguna mayuscula
+
 
 //! MAIN
 
@@ -19,7 +20,9 @@ int main()
     // Declaración de matrices para la palabra encriptada y desencriptada
     char encriptedWord[4][20];
     char desEncriptedWord[4][20];
+    //Declaracion para guardar la opcion del usuario
     int userOption;
+    //Declaracion de variable para que no deje el usuario trabajar con una matriz vacia, por tema de errores
     bool matrizCargada = false;
 
     do
@@ -33,14 +36,14 @@ int main()
             matrizCargada = true;
             break;
         case 2:
-            // Desencriptar con movimiento en -1
+            // Desencriptar con movimiento en -1 y mostrar el resultado
             if (matrizCargada)
-                deslazarUno(encriptedWord, desEncriptedWord);
+                desplazarUno(encriptedWord, desEncriptedWord);
             else
                 cout << "Primero debes cargar la matriz." << endl;
             break;
         case 3:
-            // Desencriptar en posición par -1
+            // Desencriptar en posición par -1 y mostrar el resultado
             if (matrizCargada)
                 desplazarPar(encriptedWord, desEncriptedWord);
             else
@@ -50,7 +53,7 @@ int main()
             // Desencriptar con ambas técnicas y mostrar el resultado
             if (matrizCargada)
             {
-                deslazarUno(encriptedWord, desEncriptedWord);
+                desplazarUno(encriptedWord, desEncriptedWord);
                 desplazarPar(desEncriptedWord, desEncriptedWord);
             }
             else
@@ -74,13 +77,10 @@ int main()
 //! Subprogramas
 
 //* Mostrar el menu
-
 void showMenu(int *opcion, bool matrizCargada)
 {
     do
     {   
-        // Esto es para que no pueda seleccionar ninguna de las otras opciones sin antes cargar la matriz
-
         cout << "Ingrese una de las siguientes opciones para desencriptar su palabra: " << endl;
         cout << "1 _ Cargar Matriz 4x20 (4 palabras de 20 caracteres máximo)" << endl;
         if (matrizCargada)
@@ -90,16 +90,24 @@ void showMenu(int *opcion, bool matrizCargada)
             cout << "4 _ Con ambas técnicas." << endl;
         }
         cout << "5 _ Salir del programa" << endl;
+
+        // Leer la opción del usuario
         cin >> *opcion;
 
-        //Evitar que opcion sea un string 
-        ingresarOpcion(*opcion);
-
-        if (!matrizCargada && (*opcion == 2 || *opcion == 3 || *opcion == 4))
+        // Validar si la entrada es un número entero
+        if (cin.fail())
         {
-            cout << "Primero debes cargar la matriz (opción 1)." << endl; // Si no esta cargada muestra este mensaje
-            *opcion = 0; // Si no esta cargada vuelve el loop a 0
+            cout << "Entrada no válida. Por favor, ingrese un número." << endl;
+            cin.clear(); // Limpiar el estado de error
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Descartar la entrada no válida
+            *opcion = 0; // Establecer una opción inválida para repetir el bucle
         }
+        else if (!matrizCargada && (*opcion == 2 || *opcion == 3 || *opcion == 4))
+        {
+            cout << "Primero debes cargar la matriz (opción 1)." << endl;
+            *opcion = 0; // Si no está cargada, vuelve el loop a 0 y no deja avanzar con el programa
+        }
+
     } while (*opcion < 1 || *opcion > 5);
 }
 
@@ -112,18 +120,8 @@ void convertirMinusculas(char palabra[]) {
     }
 }
 
-//* Evitar que entre un array en el menu
-//! Revisr esta validacion
-void ingresarOpcion(int &opcion){
-    // if (opcion == (1,2,3,4,5)) {
-    //     cout << "Usted ingreso un valor no valido" << endl; 
-    // }
-}
-//!
-
 
 //* Llenar matriz
-
 void llenarMatriz(char matrix[4][20])
 {
     // Función para llenar la matriz con el mensaje encriptado
@@ -137,7 +135,7 @@ void llenarMatriz(char matrix[4][20])
             cout << "Ingrese la palabra " << i + 1 << ": ";
             cin >> matrix[i];
 
-            if (strlen(matrix[i]) > 20) {
+            if (strlen(matrix[i]) > 20) { // Esta corroboracion es por si ingresa una palabra de mas de 20 char
                 cout << "Error!!";
                 cout << "Ha ingresado una palabra de más de 20 caracteres" << endl;
                 palabraValida=false;
@@ -147,9 +145,9 @@ void llenarMatriz(char matrix[4][20])
 
             for (int j = 0; j < strlen(matrix[i]); j++) // Con esto averiguo si hay algun numero u otro caracter
             {
-                cout << "Caracter:" << matrix[i][j] << " " << int(matrix[i][j]) << endl;
-                if (matrix[i][j] < 97 || matrix[i][j] > 122)
-                {
+                cout << "Caracter:" << matrix[i][j] << " " << int(matrix[i][j]) << endl; //Con esto muestra el codigo ASCII del carcater 
+                if (matrix[i][j] < 97 || matrix[i][j] > 122) 
+                { 
                     cout << '\n';
                     cout << "Caracter malo: " << matrix[i][j] << endl;
                     palabraValida = false;
@@ -167,9 +165,9 @@ void llenarMatriz(char matrix[4][20])
     }
 }
 
-//* Desplazamiento en uno
 
-void deslazarUno(char matrix[4][20], char matriz[4][20])
+//* Desplazamiento en uno
+void desplazarUno(char matrix[4][20], char matriz[4][20])
 {
     // Función para retroceder un carácter según el código ASCII
     for (int i = 0; i < 4; ++i)
@@ -192,8 +190,8 @@ void deslazarUno(char matrix[4][20], char matriz[4][20])
     }
 }
 
+    
 //* Desplazamiento par
-
 void desplazarPar(char matrix[4][20], char matriz[4][20])
 {
     // Función para desplazar caracteres en posiciones pares de la matriz
