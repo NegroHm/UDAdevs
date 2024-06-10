@@ -9,7 +9,8 @@ void showMenu(int *opcion, bool matrizCargada); // Muestra el menú
 void llenarMatriz(char matrix[4][20]); // Función para llenar la matriz con palabras ingresadas por el usuario
 void deslazarUno(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en una matriz según el código ASCII
 void desplazarPar(char matrix[4][20], char matriz[4][20]); // Función para desplazar caracteres en posiciones pares de una matriz
-
+void convertirMinusculas(char palabra[]);// Pasa todas las plabras ingresadas a minuscula
+void ingresarOpcion(int &opcion);
 
 //! MAIN
 
@@ -91,6 +92,9 @@ void showMenu(int *opcion, bool matrizCargada)
         cout << "5 _ Salir del programa" << endl;
         cin >> *opcion;
 
+        //Evitar que opcion sea un string 
+        ingresarOpcion(*opcion);
+
         if (!matrizCargada && (*opcion == 2 || *opcion == 3 || *opcion == 4))
         {
             cout << "Primero debes cargar la matriz (opción 1)." << endl; // Si no esta cargada muestra este mensaje
@@ -108,6 +112,16 @@ void convertirMinusculas(char palabra[]) {
     }
 }
 
+//* Evitar que entre un array en el menu
+//! Revisr esta validacion
+void ingresarOpcion(int &opcion){
+    // if (opcion == (1,2,3,4,5)) {
+    //     cout << "Usted ingreso un valor no valido" << endl; 
+    // }
+}
+//!
+
+
 //* Llenar matriz
 
 void llenarMatriz(char matrix[4][20])
@@ -123,14 +137,21 @@ void llenarMatriz(char matrix[4][20])
             cout << "Ingrese la palabra " << i + 1 << ": ";
             cin >> matrix[i];
 
+            if (strlen(matrix[i]) > 20) {
+                cout << "Error!!";
+                cout << "Ha ingresado una palabra de más de 20 caracteres" << endl;
+                palabraValida=false;
+            }
+            
             convertirMinusculas(matrix[i]);
 
             for (int j = 0; j < strlen(matrix[i]); j++) // Con esto averiguo si hay algun numero u otro caracter
             {
-                cout << "caracter: " << matrix[i][j] << " " << int(matrix[i][j]) << endl;
+                cout << "Caracter:" << matrix[i][j] << " " << int(matrix[i][j]) << endl;
                 if (matrix[i][j] < 97 || matrix[i][j] > 122)
                 {
-                    cout << "caracter malo" << endl;
+                    cout << '\n';
+                    cout << "Caracter malo: " << matrix[i][j] << endl;
                     palabraValida = false;
                 }
             }
@@ -140,8 +161,9 @@ void llenarMatriz(char matrix[4][20])
     // Mostrar las palabras ingresadas
     cout << "Palabras ingresadas:" << endl;
     for (int i = 0; i < 4; ++i)
-    {
+    {           
         cout << matrix[i] << endl;
+    
     }
 }
 
