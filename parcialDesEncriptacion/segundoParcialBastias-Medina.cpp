@@ -64,7 +64,7 @@ int main()
             cout << "Saliendo del programa..." << endl;
             break;
         default:
-            cout << "Opción inválida. Por favor, intente de nuevo." << endl;
+            cout << "Opcion invalida. Por favor, intente de nuevo." << endl;
             break;
         }
 
@@ -82,12 +82,12 @@ void showMenu(int *opcion, bool matrizCargada)
     do
     {   
         cout << "Ingrese una de las siguientes opciones para desencriptar su palabra: " << endl;
-        cout << "1 _ Cargar Matriz 4x20 (4 palabras de 20 caracteres máximo)" << endl;
+        cout << "1 _ Cargar Matriz 4x20 (4 palabras de 20 caracteres maximo)" << endl;
         if (matrizCargada)
         {
             cout << "2 _ Paso -1" << endl;
-            cout << "3 _ Cuando la posición de la letra es par, el paso es -1." << endl;
-            cout << "4 _ Con ambas técnicas." << endl;
+            cout << "3 _ Cuando la posicion de la letra es par, el paso es -1." << endl;
+            cout << "4 _ Con ambas tecnicas." << endl;
         }
         cout << "5 _ Salir del programa" << endl;
 
@@ -97,14 +97,14 @@ void showMenu(int *opcion, bool matrizCargada)
         // Validar si la entrada es un número entero
         if (cin.fail())
         {
-            cout << "Entrada no válida. Por favor, ingrese un número." << endl;
+            cout << "Entrada no valida. Por favor, ingrese un numero." << endl;
             cin.clear(); // Limpiar el estado de error
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Descartar la entrada no válida
             *opcion = 0; // Establecer una opción inválida para repetir el bucle
         }
         else if (!matrizCargada && (*opcion == 2 || *opcion == 3 || *opcion == 4))
         {
-            cout << "Primero debes cargar la matriz (opción 1)." << endl;
+            cout << "Primero debes cargar la matriz (opcion 1)." << endl;
             *opcion = 0; // Si no está cargada, vuelve el loop a 0 y no deja avanzar con el programa
         }
 
@@ -137,7 +137,7 @@ void llenarMatriz(char matrix[4][20])
 
             if (strlen(matrix[i]) > 20) { // Esta corroboracion es por si ingresa una palabra de mas de 20 char
                 cout << "Error!!";
-                cout << "Ha ingresado una palabra de más de 20 caracteres" << endl;
+                cout << "Ha ingresado una palabra de mas de 20 caracteres" << endl;
                 palabraValida=false;
             }
             
