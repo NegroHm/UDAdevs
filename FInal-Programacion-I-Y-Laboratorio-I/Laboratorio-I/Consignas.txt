@@ -1,0 +1,5 @@
+1 - Definir una estructura de datos (como de define una estructura de datos en C++ en el código)
+Acá es donde usamos los dato de la tabla con los datos que se nos da
+Te da una tabla que te especifica los datos y tenia nombre apellido y medio y los médicos tiene sus datos, es una estructura de datos 
+2  - Crear un programa para cargar y mostrar el promedio, mostrar el numero mas chico y su indice y mostrar los que son iguales 
+3 -  Genera un numero aleatorio en -3.5 y 5.5 , y generar otro con -10 y 10

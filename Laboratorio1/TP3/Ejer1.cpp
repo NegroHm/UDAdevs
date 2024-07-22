@@ -1,3 +1,12 @@
+// 1 Ejercicio básico de arreglos
+    // a. Crear un arreglo de 10 números.
+    // b. Cargar con valores aleatorios.
+    // c. Mostrar cada valor por pantalla junto a la posición que ocupa en el
+    // arreglo.
+    // d. Mostrar el promedio de los mismos.
+    // e. Mostrar el número más alto y la posición que ocupa en el arreglo.
+    // f. Mostrar el número más bajo y la posición que ocupa en el arreglo.
+
 #include <iostream>
 #include <stdlib.h>
 #include <ctime>
