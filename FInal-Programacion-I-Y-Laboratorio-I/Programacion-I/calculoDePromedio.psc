@@ -1,22 +1,37 @@
-SubAlgoritmo evaluarMayorMedor(num por valor)
- 	Definir mayorNum, menorNum Como Entero
-	
-	mayorNum = 0
-	Si num > 15 y num < 45 Entonces
-		mayorNum = num 
-		Escribir "Mayor de 15 y menor a 45: " mayorNum
-	SiNo
-		menorNum = num
-		Escribir "Menor de 15 o mayor a 45: " menorNum
-	Fin Si
+SubAlgoritmo evaluarMayorMenor(num Por Valor, conjuntoDeMayores Por Referencia, indiceMayores Por Referencia, conjuntoDeMenores Por Referencia, indiceMenores Por Referencia)
+    Si num > 15 y num < 45 Entonces
+        conjuntoDeMayores[indiceMayores] <- num
+        indiceMayores <- indiceMayores + 1
+    SiNo
+        conjuntoDeMenores[indiceMenores] <- num
+        indiceMenores <- indiceMenores + 1
+    Fin Si
 FinSubAlgoritmo
 
 Algoritmo calculoDePromedio
-	Definir num Como Entero
+    Definir num, indiceMayores, indiceMenores Como Entero
+    
+	Dimension conjuntoDeMayores[40] 
+	Dimension conjuntoDeMenores[40] 
+    
+    indiceMayores <- 0
+    indiceMenores <- 0
+    
+    Para i = 0 Hasta 39 Con Paso 1 Hacer
+        num <- Azar(100)
+        evaluarMayorMenor(num, conjuntoDeMayores, indiceMayores, conjuntoDeMenores, indiceMenores)
+    Fin Para
+    
+    // Mostrar los resultados
+    Escribir "Dentro del rango: "
+    Para i = 0 Hasta indiceMayores - 1 Con Paso 1 Hacer
+        Escribir " | " conjuntoDeMayores[i] Sin Saltar
+    Fin Para
+    
+	Escribir " "
 	
-	Para i = 0 Hasta 40 Con Paso 1 Hacer
-		num = azar(100) 
-		evaluarMayorMedor(num)
-	Fin Para
-	
+    Escribir "Fuera del rango: "
+    Para i = 0 Hasta indiceMenores - 1 Con Paso 1 Hacer
+        Escribir " | " conjuntoDeMenores[i]  Sin Saltar
+    Fin Para
 FinAlgoritmo
