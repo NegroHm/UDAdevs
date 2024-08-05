@@ -10,12 +10,12 @@ struct Medico{
     int dni;
 };
 
-struct DONANTE{
+struct DONANTE{ 
     char nombre[20]; 
     int dni;
     int numeroTel;
     int sangre;
-    Medico medicoCabecera;    
+    struct Medico medicoCabecera;    
 };
 
 void donanteDatos(DONANTE donante[], int tamanio);
