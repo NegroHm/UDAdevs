@@ -27,13 +27,16 @@ public class VentanaFormulario extends JFrame {
         setSize(350, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
         JPanel panelFormulario = crearPanelFormulario();
         add(panelFormulario);
     }
 
     private JPanel crearPanelFormulario() {
     JPanel panel = new JPanel(new GridBagLayout());
+
+    // Cambiar el color de fondo del JPanel
+    panel.setBackground(Color.LIGHT_GRAY); // Cambia a cualquier color que desees
+
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre los componentes
     gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -100,10 +103,15 @@ public class VentanaFormulario extends JFrame {
     panel.add(botonAgregarPedido, gbc);
 
     // Acción del botón
+    // Acción del botón
     botonAgregarPedido.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
             String nombreCliente = campoNombreCliente.getText();
+            if (nombreCliente.isEmpty()) {
+                throw new IllegalArgumentException("El nombre del cliente no puede estar vacío.");
+            }
             String formaPago = (String) comboFormaPago.getSelectedItem();
             boolean esDelivery = "Delivery".equals(comboUbicacion.getSelectedItem());
 
@@ -118,14 +126,19 @@ public class VentanaFormulario extends JFrame {
             combo.agregarItem(papas);
             combo.agregarItem(bebida);
 
-                // Crear el pedido con el combo
+            // Crear el pedido con el combo
             Pedido nuevoPedido = new Pedido(nombreCliente, combo, formaPago, esDelivery);
             gestorDePedidos.agregarPedido(nuevoPedido);
 
             // Actualizar la cola de preparación
             ventanaColaPreparacion.actualizarColaPreparacion();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    });
+    }
+});
 
     return panel;
 }

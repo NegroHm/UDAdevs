@@ -25,15 +25,22 @@ public class VentanaColaPreparacion extends JFrame {
     }
 
     public void actualizarColaPreparacion() {
-        panelColaPreparacion.removeAll();
-
-        for (Pedido pedido : gestorDePedidos.getColaPedidos()) {
-            JPanel panelPedido = crearPanelPedido(pedido);
-            panelColaPreparacion.add(panelPedido);
+        // Manejo de errores con try-catch
+        try {
+            panelColaPreparacion.removeAll();
+    
+            for (Pedido pedido : gestorDePedidos.getColaPedidos()) {
+                JPanel panelPedido = crearPanelPedido(pedido);
+                panelColaPreparacion.add(panelPedido);
+            }
+    
+            panelColaPreparacion.revalidate();
+            panelColaPreparacion.repaint();
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar la cola de preparación: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        panelColaPreparacion.revalidate();
-        panelColaPreparacion.repaint();
     }
 
     private JPanel crearPanelPedido(Pedido pedido) {
