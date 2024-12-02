@@ -19,7 +19,7 @@ public class VentanaColaPreparacion extends JFrame {
     // Configura la interfaz gráfica de la ventana
     private void inicializarUI() {
         setTitle("Cola de Preparación"); // Título de la ventana
-        setSize(300, 400); // Tamaño de la ventana
+        setSize(500, 700); // Tamaño de la ventana
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra la aplicación al cerrar la ventana
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
 
