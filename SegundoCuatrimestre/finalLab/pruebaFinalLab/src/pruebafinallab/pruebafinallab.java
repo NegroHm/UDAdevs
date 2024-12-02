@@ -1,6 +1,9 @@
 // Inicialización de la clase principal
 package pruebafinallab;
 
+import controller.GestorDePedidos;
+import view.VentanaFormulario;
+import view.VentanaColaPreparacion;
 import javax.swing.*;
 
 public class pruebafinallab{

@@ -1,12 +1,9 @@
-package pruebafinallab;
+package model;
 
-/**
- *
- * @author engrohm
- */
 import java.util.ArrayList;
 import java.util.List;
 
+// Clase Combo que extiende Comida y permite agregar múltiples items.
 public class Combo extends Comida {
     private final List<Comida> items;
 
@@ -15,12 +12,12 @@ public class Combo extends Comida {
         this.items = new ArrayList<>();
     }
 
-    // Método para agregar un item al combo
+    // Método para agregar un item al combo.
     public void agregarItem(Comida comida) {
         items.add(comida);
     }
 
-    // Obtener la lista de items en el combo
+    // Obtener la lista de items en el combo.
     public List<Comida> getItems() {
         return items;
     }
@@ -31,7 +28,7 @@ public class Combo extends Comida {
         for (Comida item : items) {
             descripcion.append(item.getNombre()).append(", ");
         }
-        // Elimina la última coma y espacio
+        // Elimina la última coma y espacio.
         if (!items.isEmpty()) {
             descripcion.setLength(descripcion.length() - 2);
         }
