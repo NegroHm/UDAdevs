@@ -2,3 +2,4 @@
 2;Nicolas;Transferencia;false;TERMINADO;Combo: Hamburguesa GRANDE, Papas CHICAS, Bebida: PEPSI
 3;Julio;Efectivo;false;TERMINADO;Combo: Hamburguesa CHICA, Papas MEDIANAS, Bebida: PEPSI
 4;Julio;Efectivo;false;PREPARACION;Combo: Hamburguesa CHICA, Papas MEDIANAS, Bebida: PEPSI
+5;Hector;Tarjeta;false;PREPARACION;Combo: Hamburguesa GRANDE, Papas GRANDES, Bebida: FANTA
