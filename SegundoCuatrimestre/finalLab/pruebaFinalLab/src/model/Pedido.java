@@ -41,4 +41,33 @@ public class Pedido extends Comida {
     public String getNombreCliente() {
         return nombreCliente;
     }
+
+    // Método para serializar un pedido a una cadena de texto.
+    @Override
+    public String toString() {
+        return numPedido + ";" + nombreCliente + ";" + formaPago + ";" +
+               esDelivery + ";" + estado + ";" + nombre;
+    }
+
+    // Método para deserializar un pedido desde una cadena de texto.
+    public static Pedido fromString(String data) {
+        String[] parts = data.split(";");
+        if (parts.length < 6) {
+            throw new IllegalArgumentException("Formato de datos inválido para Pedido.");
+        }
+
+        String nombreCliente = parts[1];
+        String formaPago = parts[2];
+        boolean esDelivery = Boolean.parseBoolean(parts[3]);
+        Estado estado = Estado.valueOf(parts[4]);
+        String nombreComida = parts[5];
+
+        // Nota: Aquí asumimos que el nombre de la comida es suficiente para recrear la comida.
+        // Si necesitas detalles más específicos, deberás deserializar Comida o sus subclases.
+        Comida comida = new Comida(nombreComida) {};
+
+        Pedido pedido = new Pedido(nombreCliente, comida, formaPago, esDelivery);
+        pedido.setEstado(estado);
+        return pedido;
+    }
 }
