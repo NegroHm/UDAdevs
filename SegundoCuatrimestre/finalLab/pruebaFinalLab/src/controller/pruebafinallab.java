@@ -1,5 +1,5 @@
 // Inicialización de la clase principal
-package pruebafinallab;
+package controller;
 
 import controller.GestorDePedidos;
 import view.VentanaFormulario;
